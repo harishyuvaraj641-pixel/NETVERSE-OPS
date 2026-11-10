@@ -450,7 +450,7 @@ See [THIRD_PARTY_NOTICES.md](netverse-ops/THIRD_PARTY_NOTICES.md) for open-sourc
 
 <br/><br/>
 
-### Built with ⚡ by [Harish Yuvaraj](https://github.com/harishyuvaraj641-pixel)
+### Built by [Harish Yuvaraj](https://github.com/harishyuvaraj641-pixel)
 
 <br/>
 
