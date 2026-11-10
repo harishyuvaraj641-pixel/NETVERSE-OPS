@@ -30,7 +30,7 @@
 
 <a href="#-quick-start"><img src="https://img.shields.io/badge/▶_LAUNCH_SIMULATION-00f0ff?style=for-the-badge&labelColor=0a0a1a" alt="Launch" /></a>
 &nbsp;&nbsp;
-<a href="#-video-demos"><img src="https://img.shields.io/badge/🎬_WATCH_DEMOS-aa44ff?style=for-the-badge&labelColor=0a0a1a" alt="Demos" /></a>
+<a href="#-feature-highlights"><img src="https://img.shields.io/badge/✨_FEATURES-aa44ff?style=for-the-badge&labelColor=0a0a1a" alt="Features" /></a>
 &nbsp;&nbsp;
 <a href="#-architecture"><img src="https://img.shields.io/badge/📐_ARCHITECTURE-00ff88?style=for-the-badge&labelColor=0a0a1a" alt="Architecture" /></a>
 
@@ -60,43 +60,6 @@ Both systems are **fully integrated** — switch between high-level network topo
 <br/>
 <sub><i>Left: Digital Twin Network Topology Simulator &nbsp; ⚡ &nbsp; Right: Netverse Ops 3D Datacenter Facility</i></sub>
 </div>
-
-<br/>
-
----
-
-<br/>
-
-## 🎬 Video Demos
-
-<div align="center">
-
-### 🔮 Digital Twin Network — Topology Simulation
-
-https://github.com/user-attachments/assets/digital-twin-demo
-
-> *Real-time 3D network visualization with packet flow animation, device status monitoring, topology switching, and interactive device inspection.*
-
-<br/>
-
-### 🏢 Netverse Ops 3D — Datacenter Walkthrough
-
-https://github.com/user-attachments/assets/netverse-ops-demo
-
-> *First-person exploration of a cinematic datacenter facility — patch cables, inspect server racks, toggle morning/night lighting, and resolve critical network incidents.*
-
-<br/>
-
-### 🔗 Seamless Integration — One-Click Switch
-
-https://github.com/user-attachments/assets/integration-demo
-
-> *Switch between the network topology map and the physical datacenter in real-time. Monitor from above, then walk the floor.*
-
-</div>
-
-> [!TIP]
-> **To add your own demo videos:** Record your screen, then drag and drop the `.mp4` files into the GitHub issue/PR editor to generate hosted video URLs. Replace the placeholder URLs above.
 
 <br/>
 
