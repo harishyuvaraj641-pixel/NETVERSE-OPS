@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Twin Network Simulator</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="app">
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+      <div class="loader">
+        <div class="loader-ring"></div>
+        <div class="loader-text">INITIALIZING NETWORK DIGITAL TWIN</div>
+        <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+      </div>
+    </div>
+
+    <!-- Three.js Canvas Container -->
+    <div id="canvas-container"></div>
+
+    <!-- Top Bar -->
+    <div id="top-bar">
+      <div class="top-bar-left">
+        <div class="logo">
+          <span class="logo-icon">◈</span>
+          <span class="logo-text">NETWATCH<span class="logo-sub">DIGITAL TWIN</span></span>
+        </div>
+      </div>
+      <div class="top-bar-center">
+        <div class="stat-card">
+          <div class="stat-icon">⬡</div>
+          <div class="stat-info">
+            <div class="stat-label">DEVICES</div>
+            <div class="stat-value" id="device-count">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⟷</div>
+          <div class="stat-info">
+            <div class="stat-label">LINKS</div>
+            <div class="stat-value" id="connection-count">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">♥</div>
+          <div class="stat-info">
+            <div class="stat-label">HEALTH</div>
+            <div class="stat-value" id="network-health">100%</div>
+          </div>
+          <div class="health-bar" id="health-bar"><div class="health-bar-fill"></div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">↑↓</div>
+          <div class="stat-info">
+            <div class="stat-label">TRAFFIC</div>
+            <div class="stat-value" id="traffic-rate">0 pkt/s</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-info">
+            <div class="stat-label">BANDWIDTH</div>
+            <div class="stat-value" id="bandwidth-total">0 Mbps</div>
+          </div>
+        </div>
+      </div>
+      <div class="top-bar-right">
+        <!-- Netverse Ops Integration Button -->
+        <button id="btn-open-netverse" class="btn-netverse-launch" title="Launch Netverse Ops (3D Datacenter Facility)">
+          <span class="btn-netverse-icon">⚡</span>
+          <span class="btn-netverse-text">Netverse Ops</span>
+          <span class="btn-netverse-badge">3D</span>
+        </button>
+
+        <div id="sim-controls">
+          <button id="btn-speed-down" class="ctrl-btn" title="Slow Down">⏪</button>
+          <button id="btn-toggle-sim" class="ctrl-btn primary" title="Toggle Simulation">▶</button>
+          <button id="btn-speed-up" class="ctrl-btn" title="Speed Up">⏩</button>
+          <span id="sim-speed-display" class="speed-display">1.0x</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left Sidebar -->
+    <div id="left-sidebar">
+      <button id="btn-toggle-sidebar" class="sidebar-toggle" title="Toggle Sidebar">☰</button>
+      <div class="sidebar-content">
+        <div class="sidebar-section">
+          <h3 class="section-title">TOPOLOGY</h3>
+          <select id="topology-select" class="select-input">
+            <option value="enterprise">🏢 Enterprise Network</option>
+            <option value="datacenter">🖥️ Data Center</option>
+            <option value="home">🏠 Home Network</option>
+            <option value="iot">📡 IoT Network</option>
+            <option value="mesh">🕸️ Mesh Network</option>
+          </select>
+          <button id="btn-load-topology" class="btn btn-primary">Load Topology</button>
+        </div>
+        <div class="sidebar-section">
+          <h3 class="section-title">DEVICES</h3>
+          <button id="btn-add-device" class="btn btn-secondary">+ Add Device</button>
+          <button id="btn-clear-all" class="btn btn-danger">✕ Clear All</button>
+        </div>
+        <div class="sidebar-section">
+          <h3 class="section-title">INTEGRATED PROJECTS</h3>
+          <button id="btn-sidebar-netverse" class="btn btn-launch-project" title="Open Netverse Ops 3D Datacenter Facility">
+            <span>⚡ Launch Netverse Ops</span>
+          </button>
+        </div>
+        <div class="sidebar-section">
+          <h3 class="section-title">NETWORK DEVICES</h3>
+          <div id="device-list" class="device-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Panel (Device Info) -->
+    <div id="right-panel" class="hidden">
+      <button id="right-panel-close" class="panel-close">✕</button>
+      <h3 class="panel-title">DEVICE DETAILS</h3>
+      <div id="device-info-content">
+        <div class="info-header">
+          <div class="device-icon-large" id="device-icon"></div>
+          <div>
+            <div class="info-name" id="device-name">-</div>
+            <div class="info-type" id="device-type">-</div>
+          </div>
+        </div>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">IP Address</span>
+            <span class="info-value" id="device-ip">-</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Status</span>
+            <span class="info-value" id="device-status">-</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Uptime</span>
+            <span class="info-value" id="device-uptime">-</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">MAC</span>
+            <span class="info-value" id="device-mac">-</span>
+          </div>
+        </div>
+        <div class="metrics-section">
+          <h4>Performance Metrics</h4>
+          <div class="metric">
+            <div class="metric-header">
+              <span>CPU Usage</span>
+              <span id="device-cpu-val">0%</span>
+            </div>
+            <div class="metric-bar"><div class="metric-bar-fill" id="device-cpu"></div></div>
+          </div>
+          <div class="metric">
+            <div class="metric-header">
+              <span>Memory</span>
+              <span id="device-memory-val">0%</span>
+            </div>
+            <div class="metric-bar"><div class="metric-bar-fill" id="device-memory"></div></div>
+          </div>
+          <div class="metric">
+            <div class="metric-header">
+              <span>Bandwidth</span>
+              <span id="device-bandwidth-val">0 Mbps</span>
+            </div>
+            <div class="metric-bar"><div class="metric-bar-fill" id="device-bandwidth"></div></div>
+          </div>
+        </div>
+        <div class="device-actions">
+          <button id="btn-toggle-status" class="btn btn-secondary">Toggle Status</button>
+          <button id="btn-remove-device" class="btn btn-danger">Remove Device</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert Container -->
+    <div id="alert-container">
+      <div class="alert-header">
+        <span>⚠ ALERTS</span>
+        <button id="btn-clear-alerts" class="btn-small">Clear</button>
+      </div>
+      <div id="alert-list"></div>
+    </div>
+
+    <!-- Add Device Modal -->
+    <div id="add-device-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3>Add Network Device</h3>
+        <div class="form-group">
+          <label>Device Type</label>
+          <select id="modal-device-type" class="select-input">
+            <option value="router">🔵 Router</option>
+            <option value="switch">🟢 Switch</option>
+            <option value="server">⚪ Server</option>
+            <option value="firewall">🟠 Firewall</option>
+            <option value="workstation">💻 Workstation</option>
+            <option value="cloud">☁️ Cloud Service</option>
+            <option value="database">🟣 Database</option>
+            <option value="loadbalancer">🟡 Load Balancer</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Device Name</label>
+          <input type="text" id="modal-device-name" class="text-input" placeholder="e.g. Core Router 1">
+        </div>
+        <div class="form-group">
+          <label>IP Address</label>
+          <input type="text" id="modal-device-ip" class="text-input" placeholder="e.g. 192.168.1.1">
+        </div>
+        <div class="form-group">
+          <label>Connect To (Device ID)</label>
+          <select id="modal-connect-to" class="select-input">
+            <option value="">-- None --</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button id="btn-modal-add" class="btn btn-primary">Add Device</button>
+          <button id="btn-modal-cancel" class="btn btn-secondary">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Netverse Ops Integration Modal -->
+    <div id="netverse-modal" class="project-modal hidden">
+      <div class="project-modal-backdrop"></div>
+      <div class="project-modal-container">
+        <div class="project-modal-header">
+          <div class="project-modal-title">
+            <span class="modal-icon">⚡</span>
+            <span class="modal-name">NETVERSE OPS</span>
+            <span class="modal-tag">3D Datacenter Facility</span>
+          </div>
+          <div class="project-modal-controls">
+            <button id="btn-netverse-popout" class="modal-ctrl-btn" title="Open in New Tab / Window">↗ New Tab</button>
+            <button id="btn-netverse-fullscreen" class="modal-ctrl-btn" title="Toggle Fullscreen">⛶ Fullscreen</button>
+            <button id="btn-netverse-close" class="modal-ctrl-btn close-btn" title="Close Netverse Ops">✕ Close</button>
+          </div>
+        </div>
+        <div class="project-modal-body">
+          <div id="netverse-loader" class="netverse-loader">
+            <div class="loader-ring"></div>
+            <div class="loader-text">LAUNCHING NETVERSE OPS FACILITY...</div>
+          </div>
+          <iframe id="netverse-iframe" src="" allow="fullscreen; pointer-lock; autoplay"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- FPS Counter -->
+    <div id="fps-counter">0 FPS</div>
+
+    <!-- Tooltip -->
+    <div id="tooltip" class="hidden"></div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

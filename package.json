@@ -1,0 +1,12 @@
+{
+  "name": "network-digital-twin-suite",
+  "version": "1.0.0",
+  "description": "Digital Twin Network Simulator with integrated Netverse Ops 3D Datacenter Facility",
+  "scripts": {
+    "start": "npx serve digital-twin-network",
+    "serve": "npx serve digital-twin-network",
+    "test": "node test_integration.mjs",
+    "build:netverse": "cd netverse-ops && npm run build && xcopy /E /I /Y dist ..\\digital-twin-network\\netverse",
+    "dev:netverse": "cd netverse-ops && npm run dev"
+  }
+}

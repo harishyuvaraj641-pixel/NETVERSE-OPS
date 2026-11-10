@@ -1,0 +1,84 @@
+{
+  "title": "Netverse Ops",
+  "hook": "Explore and patch datacenter cables",
+  "game_overview": "Step into a futuristic datacenter in first-person 3D, switching between morning and night modes, and physically patching cables to keep infrastructure optimal.",
+  "artstyle": "cinematic",
+  "genre": "action_adventure",
+  "winning_condition": "Resolve all four critical simulated network incident missions and stabilize overall enterprise infrastructure health at 100%.",
+  "losing_condition": "Simulated network health falls to 0% from unresolved cascading device failures and congestion overloads.",
+  "player_mode": "single_player",
+  "supported_orientations": [
+    "landscape",
+    "wide"
+  ],
+  "input_methods": [
+    "keyboard",
+    "mouse",
+    "touch"
+  ],
+  "score_options": {
+    "score_type": "points",
+    "score_order": "higher_is_better"
+  },
+  "low_end_device_support": false,
+  "mobile_playable": true,
+  "language": [
+    "en"
+  ],
+  "content_descriptors": [],
+  "controls": [
+    {
+      "input": "W / S or Virtual Stick Up/Down",
+      "action": "Walk forward or backward through the datacenter corridors."
+    },
+    {
+      "input": "A / D or Virtual Stick Left/Right",
+      "action": "Strafe left or right."
+    },
+    {
+      "input": "Mouse Movement / Touch Drag",
+      "action": "First-person camera pitch and yaw aiming."
+    },
+    {
+      "input": "Shift / Sprint Toggle",
+      "action": "Sprint to traverse rooms quickly."
+    },
+    {
+      "input": "Spacebar / Jump Button",
+      "action": "Jump over cable conduits and floor obstacles."
+    },
+    {
+      "input": "E / Touch Interact Button",
+      "action": "Interact with hardware, or directly plug / unplug targeted physical patch cables."
+    },
+    {
+      "input": "Morning Mode HUD Button",
+      "action": "Toggle between datacenter night lighting and natural dawn morning sunlight through glass skylights."
+    },
+    {
+      "input": "TAB / Topology Button",
+      "action": "Toggle full Digital Twin live network topology and health map."
+    },
+    {
+      "input": "ESC / Menu Button",
+      "action": "Pause the simulation and open system settings."
+    }
+  ],
+  "sections": [
+    {
+      "title": "Interactive Patch Cabling System",
+      "content": "Players can physically approach server racks, core routers, firewalls, and distribution switches to inspect 3D patch cords. Aiming at a cable connector enables immediate plugging and unplugging via the E key or touch button. Disconnecting a cable breaks the virtual link, triggers real-time packet loss alerts, and dangles the cable with an unplugged warning boot. Reconnecting the cable seats the connector, restores link carriers, and accelerates data packet pulses along the curved 3D spline. In addition, every device has a 'Cables & Ports' holographic tab allowing granular port-level patching.",
+      "summary": "Physical 3D cable plugging and unplugging mechanics."
+    },
+    {
+      "title": "Dynamic Morning Mode Environment",
+      "content": "Players can toggle Morning Mode on the fly from the HUD or pause menu. In Morning Mode, warm golden dawn sunlight streams in through overhead glass skylights with visible volumetric light shafts, illuminating the metallic datacenter floors and server halls with soft daylight tones while retaining the high-tech neon LED instrumentation.",
+      "summary": "Dual lighting modes: cyber datacenter night and natural dawn sunlight."
+    },
+    {
+      "title": "Real Network ICMP Diagnostics",
+      "content": "Diagnostics now simulate real networking protocols. Executing an ICMP ping from a device runs graph traversal across all physically plugged cables. If the device's cable is unplugged, the ping realistically fails with 'connect: Network is unreachable (eth0: NO-CARRIER)'. If an upstream trunk is disconnected along the route to the target IP, intermediate nodes respond with 'Destination Host Unreachable' and specify the broken link. When all patch cables and hops are plugged and operational, the ping returns real hop TTL, sub-millisecond latencies, and 0% packet loss.",
+      "summary": "Graph-based routing path discovery and physical carrier validation."
+    }
+  ]
+}

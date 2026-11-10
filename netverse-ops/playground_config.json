@@ -1,0 +1,86 @@
+{
+  "schema": [
+    {
+      "name": "playerSpeed",
+      "type": "number",
+      "label": "Player Walk Speed",
+      "default": 5.0,
+      "min": 2.0,
+      "max": 10.0,
+      "step": 0.5
+    },
+    {
+      "name": "playerSprintSpeed",
+      "type": "number",
+      "label": "Player Sprint Speed",
+      "default": 8.0,
+      "min": 4.0,
+      "max": 14.0,
+      "step": 0.5
+    },
+    {
+      "name": "jumpForce",
+      "type": "number",
+      "label": "Jump Force",
+      "default": 4.8,
+      "min": 2.0,
+      "max": 9.0,
+      "step": 0.4
+    },
+    {
+      "name": "interactionDistance",
+      "type": "number",
+      "label": "Interaction Distance",
+      "default": 4.0,
+      "min": 2.0,
+      "max": 7.0,
+      "step": 0.5
+    },
+    {
+      "name": "mouseSensitivity",
+      "type": "number",
+      "label": "Mouse Look Sensitivity",
+      "default": 1.6,
+      "min": 0.5,
+      "max": 3.5,
+      "step": 0.1
+    },
+    {
+      "name": "initialNetworkHealth",
+      "type": "number",
+      "label": "Initial Network Health",
+      "default": 85,
+      "min": 50,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "name": "defaultMusicVolume",
+      "type": "number",
+      "label": "Default Music Volume",
+      "default": 0.35,
+      "min": 0,
+      "max": 1,
+      "step": 0.05
+    },
+    {
+      "name": "defaultSfxVolume",
+      "type": "number",
+      "label": "Default SFX Volume",
+      "default": 0.65,
+      "min": 0,
+      "max": 1,
+      "step": 0.05
+    }
+  ],
+  "values": {
+    "playerSpeed": 5.0,
+    "playerSprintSpeed": 8.0,
+    "jumpForce": 4.8,
+    "interactionDistance": 4.0,
+    "mouseSensitivity": 1.6,
+    "initialNetworkHealth": 85,
+    "defaultMusicVolume": 0.35,
+    "defaultSfxVolume": 0.65
+  }
+}

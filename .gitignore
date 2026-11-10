@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Dev build
+netverse-ops/dist/
+
+# Archives
+*.7z
+*.zip
+digital-twin-network(Copy)/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS Files
+.DS_Store
+Thumbs.db
